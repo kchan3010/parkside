@@ -31,7 +31,7 @@ $encrypted_token = $encrypter->encrypt(csrf_token());
         <form id="loan_app_form">
             Loan Amount: <input type="text" name="loan_amt" id="loan_amt"><br>
             Property Value: <input type="text" name="prop_value" id="prop_value"><br>
-            SSN: <input type="text" name="ssn" id="ssn"><br>
+            SSN (xxx-xx-xxxx): <input type="text" name="ssn" id="ssn"><br>
             <p></p>
             <input type="submit" value="Submit" onclick="process_loan()">
         </form>
