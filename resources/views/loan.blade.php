@@ -27,26 +27,24 @@ $encrypted_token = $encrypter->encrypt(csrf_token());
         Enter your information and click submit to apply for a loan
     </div>
 
-    <div id="loan-form" class="col-sm-2">
+    <div id="loan-form">
         <form id="loan-app-form">
             <div id="loan-amt-group" class="form-group">
-                Loan Amount: <input type="text" class="form-control" name="loan_amt" id="loan_amt"><br>
+                Loan Amount: <input type="text" name="loan_amt" id="loan_amt"><br>
             </div>
             <div id="prop-val-group" class="form-group">
-                Property Value: <input type="text" class="form-control" name="prop_value" id="prop_value"><br>
+                Property Value: <input type="text" name="prop_value" id="prop_value"><br>
             </div>
             <div id="ssn-group" class="form-group">
-                SSN (xxx-xx-xxxx): <input type="text" class="form-control" name="ssn" id="ssn" placeholder="xxx-xx-xxxx"><br>
+                SSN (xxx-xx-xxxx): <input type="text" name="ssn" id="ssn" placeholder="xxx-xx-xxxx"><br>
 
             </div>
             <p></p>
             <input type="button" value="Submit Application" onclick="process_loan()">
-            <input type="submit" value="Submit" onclick="process_loan()">
+
         </form>
+        <div id="loan-status"></div>
     </div>
 
-    <div id="loan-status">
-
-    </div>
 
 </body>

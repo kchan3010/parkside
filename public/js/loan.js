@@ -5,6 +5,7 @@ function process_loan()
 {
 
     $('#loan-status').removeClass('has-error'); // remove the error class
+    $('#loan-status').removeClass('alert alert-success'); // remove the success class
     $('.help-block').remove(); // remove the error text
 
     var $_token = $('#token').val();
@@ -33,15 +34,34 @@ function process_loan()
             console.log(data);
 
             if(!data.success) {
-                $("#loan-status").addClass('has-error');
-                $("#loan-status").append('<div class="help-block">' + data.msg + '</div>');
-                $("#loan-status").append('<div class="help-block">Status:' + data.loan_status + '</div>');
-                $("#loan-status").append('<div class="help-block">' + data.errors + '</div>');
+                if(data.errors.loan_amt)
+                {
+                    $("#loan-amt-group").addClass('has-error');
+                    for(i in data.errors.loan_amt) {
+                        $("#loan-amt-group").append('<div class="help-block">' + data.errors.loan_amt[i] + '</div>');
+                    }
+                }
+
+                if(data.errors.prop_val)
+                {
+                    $("#prop-val-group").addClass('has-error');
+                    for(i in data.errors.prop_val) {
+                        $("#prop-val-group").append('<div class="help-block">' + data.errors.prop_val[i] + '</div>');
+                    }
+                }
+
+                if(data.errors.ssn)
+                {
+                    $("#ssn-group").addClass('has-error');
+                    for(i in data.errors.ssn) {
+                        $("#ssn-group").append('<div class="help-block">' + data.errors.ssn[i] + '</div>');
+                    }
+                }
             } else {
                 $("#loan-status").addClass('alert alert-success');
-                $("#loan-status").append('Status:' + data.loan_status + '</div>');
-                $("#loan-status").append('<div>' + data.msg + '</div>');
-                $("#loan-status").append('<div>' + data.errors + '</div>');
+                $("#loan-status").append('<div class="help-block"> Status:' + data.loan_status + '</div>');
+                $("#loan-status").append('<div class="help-block">' + data.msg + '</div>');
+
 
             }
         });
