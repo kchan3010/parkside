@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class LoanSubmissionController extends Controller
 {
-    const LTV_THRESHOLD = 40;
-    const LOAN_STATUS_DENIED = 'denied';
-    const LOAN_STATUS_APPROVED = 'approved';
+    const LTV_THRESHOLD         = 40;
+    const LOAN_STATUS_DENIED    = 'denied';
+    const LOAN_STATUS_APPROVED  = 'approved';
 
     protected $errors;
     protected $loan_amt;
@@ -17,12 +17,12 @@ class LoanSubmissionController extends Controller
 
     public function process()
     {
-        $this->validate();
         try{
 
-//            if(!empty($this->errors)) {
-//                throw new \Exception();
-//            }
+            $this->validateSubmission();
+            if(!empty($this->errors)) {
+                throw new \Exception();
+            }
 
             $loan_status = $this->reviewLoanApplication();
             $success = true;
@@ -46,12 +46,13 @@ class LoanSubmissionController extends Controller
 
     }
 
-    public function validate()
+    public function validateSubmission()
     {
         if(empty($_POST['loan'])) {
             $this->errors[] = 'Loan amount is required';
         } else {
             $this->loan_amt = $_POST['loan'];
+        }
 
 
         if(empty($_POST['prop_val'])) {
@@ -78,13 +79,12 @@ class LoanSubmissionController extends Controller
             $this->errors[] = "Property value amount needs to be a positive value";
         }
 
-        $ssn_pattern = "/(?!000|666)[0-9]{3}([ -]?)(?!00)[0-9]{2}\1(?!0000)[0-9]{4}/";
+        $ssn_pattern = "/[0-9]{3}-[0-9]{2}-[0-9]{4}/";
         if(!preg_match($ssn_pattern, $this->ssn)) {
             $this->errors[] = "Social Security Numbers need to be numeric and follow this format (xxx-xx-xxxx)";
         }
 
     }
-}
 
     public function reviewLoanApplication()
     {

@@ -10,8 +10,8 @@ function process_loan()
     var $_token = $('#token').val();
 
     var form_data = {
-        'loan' : $("#loan-amt").val(),
-        'prop_val' : $("#prop-value").val(),
+        'loan' : $("#loan_amt").val(),
+        'prop_val' : $("#prop_value").val(),
         'ssn' : $("#ssn").val()
     };
 
@@ -30,16 +30,16 @@ function process_loan()
     )
 
         .done(function(data) {
-            // console.log(data);
+            console.log(data);
 
             if(!data.success) {
-                $("#loan_status").addClass('has-error');
+                $("#loan-status").addClass('has-error');
                 $("#loan-status").append('<div class="help-block">' + data.msg + '</div>');
-                $("#loan-status").append('Status:' + data.status + '</div>');
+                $("#loan-status").append('<div class="help-block">Status:' + data.loan_status + '</div>');
                 $("#loan-status").append('<div class="help-block">' + data.errors + '</div>');
             } else {
-                $("#loan_status").addClass('alert alert-success');
-                $("#loan-status").append('Status:' + data.status + '</div>');
+                $("#loan-status").addClass('alert alert-success');
+                $("#loan-status").append('Status:' + data.loan_status + '</div>');
                 $("#loan-status").append('<div>' + data.msg + '</div>');
                 $("#loan-status").append('<div>' + data.errors + '</div>');
 

@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 Route::post('/loan-submission', 'LoanSubmissionController@process');
+Route::get('/loan-submission', 'LoanSubmissionController@process');
 
