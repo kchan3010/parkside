@@ -17,12 +17,12 @@ class LoanSubmissionController extends Controller
 
     public function process()
     {
+        $this->validate();
         try{
-            $this->validate();
 
-            if(!empty($this->errors)) {
-                throw new \Exception();
-            }
+//            if(!empty($this->errors)) {
+//                throw new \Exception();
+//            }
 
             $loan_status = $this->reviewLoanApplication();
             $success = true;
@@ -49,19 +49,19 @@ class LoanSubmissionController extends Controller
     public function validate()
     {
         if(empty($_POST['loan'])) {
-            $this->erors[] = 'Loan amount is required';
+            $this->errors[] = 'Loan amount is required';
         } else {
             $this->loan_amt = $_POST['loan'];
 
 
         if(empty($_POST['prop_val'])) {
-            $this->erors[] = 'Property value amount is required';
+            $this->errors[] = 'Property value amount is required';
         } else {
             $this->prop_val = $_POST['prop_val'];
         }
 
         if(empty($_POST['ssn'])) {
-            $this->erors[] = 'Property value amount is required';
+            $this->errors[] = 'Property value amount is required';
         } else {
             $this->ssn = $_POST['ssn'];
         }
@@ -95,7 +95,7 @@ class LoanSubmissionController extends Controller
         if($ltv <= self::LTV_THRESHOLD) {
             $ret_val = self::LOAN_STATUS_APPROVED;
         }
-        
+
         return $ret_val;
     }
 }
