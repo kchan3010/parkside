@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 class LoanSubmissionController extends Controller
 {
     const LTV_THRESHOLD         = 40;
-    const LOAN_STATUS_DENIED    = 'denied';
-    const LOAN_STATUS_APPROVED  = 'approved';
+    const LOAN_STATUS_DENIED    = 'Rejected';
+    const LOAN_STATUS_APPROVED  = 'Accepted';
 
     protected $errors;
     protected $loan_amt;
